@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anne 2.0 — Daily Affirmations</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep: #1a1025;
+    --mid: #2d1f45;
+    --purple: #6b4fa0;
+    --lavender: #a98fd4;
+    --gold: #c9a84c;
+    --gold-light: #e8d5a3;
+    --cream: #f5f0e8;
+    --muted: #8a7fa0;
+    --seal-bg: #231535;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--deep);
+    color: var(--cream);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Subtle background texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 20%, rgba(107,79,160,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 80% 80%, rgba(201,168,76,0.08) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 1.25rem 4rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 3rem 0 2rem;
+    border-bottom: 0.5px solid rgba(169,143,212,0.2);
+    margin-bottom: 2rem;
+  }
+
+  .header-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .header-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .header-sub {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* Identity anchor */
+  .anchor-bar {
+    background: rgba(107,79,160,0.15);
+    border: 0.5px solid rgba(169,143,212,0.25);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .anchor-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: var(--lavender);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .anchor-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--gold-light);
+    line-height: 1.6;
+  }
+
+  /* Screens */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* List screen */
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .aff-card {
+    background: rgba(45,31,69,0.6);
+    border: 0.5px solid rgba(169,143,212,0.2);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .aff-card:hover {
+    border-color: rgba(169,143,212,0.5);
+    background: rgba(45,31,69,0.9);
+  }
+
+  .card-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--lavender);
+    min-width: 22px;
+    margin-top: 1px;
+    opacity: 0.7;
+  }
+
+  .card-content { flex: 1; }
+
+  .card-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: var(--cream);
+    line-height: 1.55;
+    margin-bottom: 4px;
+  }
+
+  .card-category {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .card-arrow {
+    color: var(--lavender);
+    opacity: 0.5;
+    font-size: 16px;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+
+  /* Practice screen */
+  .back-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    margin-bottom: 2rem;
+    transition: color 0.15s;
+  }
+
+  .back-btn:hover { color: var(--lavender); }
+
+  .practice-category {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    text-align: center;
+  }
+
+  .practice-affirmation {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--cream);
+    line-height: 1.6;
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem 1.25rem;
+    background: rgba(45,31,69,0.5);
+    border-top: 1px solid rgba(201,168,76,0.3);
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+  }
+
+  /* Dots */
+  .dots-area {
+    text-align: center;
+    margin-bottom: 1.75rem;
+  }
+
+  .dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 0.6rem;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid rgba(169,143,212,0.4);
+    background: transparent;
+    transition: background 0.3s, border-color 0.3s, transform 0.2s;
+  }
+
+  .dot.filled {
+    background: var(--gold);
+    border-color: var(--gold);
+    transform: scale(1.15);
+  }
+
+  .dots-label {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  /* Step guide */
+  .step-guide {
+    margin-bottom: 1.75rem;
+    border-left: 1px solid rgba(169,143,212,0.25);
+    padding-left: 1.1rem;
+  }
+
+  .step {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(138,127,160,0.5);
+    padding: 5px 0;
+    line-height: 1.4;
+    transition: color 0.3s;
+  }
+
+  .step.current {
+    color: var(--cream);
+    font-weight: 400;
+  }
+
+  .step.done {
+    color: rgba(169,143,212,0.4);
+  }
+
+  .step-marker {
+    display: inline-block;
+    font-family: 'Cormorant Garamond', serif;
+    margin-right: 6px;
+    font-size: 14px;
+  }
+
+  /* Speak button */
+  .speak-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--purple);
+    border: none;
+    border-radius: 10px;
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cream);
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: background 0.2s, transform 0.1s;
+  }
+
+  .speak-btn:hover:not(:disabled) { background: #7d5cb8; }
+  .speak-btn:active:not(:disabled) { transform: scale(0.98); }
+
+  .speak-btn:disabled {
+    background: rgba(107,79,160,0.2);
+    color: var(--muted);
+    cursor: not-allowed;
+  }
+
+  .reset-btn {
+    width: 100%;
+    padding: 12px;
+    background: none;
+    border: 0.5px solid rgba(169,143,212,0.25);
+    border-radius: 10px;
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    margin-bottom: 1.5rem;
+  }
+
+  .reset-btn:hover {
+    border-color: rgba(169,143,212,0.5);
+    color: var(--lavender);
+  }
+
+  /* Seal */
+  .seal-card {
+    background: var(--seal-bg);
+    border: 0.5px solid rgba(201,168,76,0.35);
+    border-radius: 12px;
+    padding: 1.5rem 1.25rem;
+    text-align: center;
+    display: none;
+    animation: fadeUp 0.5s ease;
+  }
+
+  .seal-card.visible { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .seal-eyebrow {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .seal-divider {
+    width: 40px;
+    height: 0.5px;
+    background: rgba(201,168,76,0.4);
+    margin: 0.75rem auto;
+  }
+
+  .seal-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--gold-light);
+    line-height: 1.65;
+  }
+
+  .seal-close {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: rgba(201,168,76,0.5);
+    margin-top: 0.75rem;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <p class="header-eyebrow">Anne 2.0</p>
+    <h1 class="header-title">Daily Affirmations</h1>
+    <p class="header-sub">Speak. Claim. Seal.</p>
+  </div>
+
+  <div class="anchor-bar">
+    <p class="anchor-label">Core Identity Anchor</p>
+    <p class="anchor-text">I am divinely guided, fully aligned, richly resourced, radiantly healthy, and purposefully building empires of impact, wealth, nourishment, dignity, and legacy.</p>
+  </div>
+
+  <!-- LIST SCREEN -->
+  <div class="screen active" id="list-screen">
+    <p class="section-label">Choose your affirmation</p>
+    <div id="aff-list"></div>
+  </div>
+
+  <!-- PRACTICE SCREEN -->
+  <div class="screen" id="practice-screen">
+    <button class="back-btn" onclick="goBack()">
+      ← All affirmations
+    </button>
+
+    <p class="practice-category" id="practice-category"></p>
+    <p class="practice-affirmation" id="practice-text"></p>
+
+    <div class="dots-area">
+      <div class="dots">
+        <div class="dot" id="d1"></div>
+        <div class="dot" id="d2"></div>
+        <div class="dot" id="d3"></div>
+        <div class="dot" id="d4"></div>
+        <div class="dot" id="d5"></div>
+      </div>
+      <p class="dots-label" id="dots-label">Repetition 0 of 5</p>
+    </div>
+
+    <div class="step-guide" id="step-guide"></div>
+
+    <button class="speak-btn" id="speak-btn" onclick="speakIt()">Speak it</button>
+    <button class="reset-btn" onclick="resetPractice()">Begin again</button>
+
+    <div class="seal-card" id="seal-card">
+      <p class="seal-eyebrow">Manifestation Seal</p>
+      <div class="seal-divider"></div>
+      <p class="seal-text" id="seal-text"></p>
+      <div class="seal-divider"></div>
+      <p class="seal-close">It is already done. I see it. I feel it. I live it.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const affirmations = [
+  {
+    num: 1,
+    category: "Divine Source & Alignment",
+    text: "God is my source, my guide, my strength, and my supply. I walk in divine favour, clear direction, perfect timing, and overflowing grace. I am open. I am ready. I am aligned.",
+    seal: "The favour is constant. The direction is clear. The supply is overflowing. It is done."
+  },
+  {
+    num: 2,
+    category: "Abundance & Divine Circulation",
+    text: "I am an open channel of divine abundance. Wealth flows to me and through me with purpose, precision, and joy, returning multiplied through contracts, clients, partnerships, products, platforms, and aligned opportunities.",
+    seal: "The channel is open. The flow is purposeful. Abundance multiplies. It is done."
+  },
+  {
+    num: 3,
+    category: "Million-Dollar Rhythm",
+    text: "My impact returns to me in joyful, abundant revenue. I receive no less than $1 million monthly through clean, aligned, purposeful streams of value that serve people, strengthen systems, and expand my legacy.",
+    seal: "The rhythm is established. The million flows. The legacy expands. It is sealed."
+  },
+  {
+    num: 4,
+    category: "Health & Radiant Vitality",
+    text: "I rise each day with radiant health, clear energy, youthful vitality, and a calm, powerful presence. My body supports my vision with strength, beauty, discipline, and ease.",
+    seal: "The body is aligned. The vitality is radiant. The vision is supported. It is done."
+  },
+  {
+    num: 5,
+    category: "Purpose & Ten Million Lives",
+    text: "I am called to awaken and equip 10 million African youth with dignity, skills, confidence, and destiny. My work is already a movement, and every course, workbook, platform, and story expands measurable transformation across Africa.",
+    seal: "The movement is alive. The ten million are rising. The transformation is real. It is sealed."
+  },
+  {
+    num: 6,
+    category: "Afrique — Continental Movement",
+    text: "Afrique is thriving as Africa's youth transformation engine. I see learners rising with purpose, badges glowing with achievement, testimonies multiplying, and systems carrying wisdom, confidence, and opportunity across the continent.",
+    seal: "Afrique is thriving. The continent is rising. The engine runs. It is done."
+  },
+  {
+    num: 7,
+    category: "Eden — Regenerative Prosperity",
+    text: "Eden is flourishing as a traceable, trusted, regenerative food enterprise. I see healthy livestock, abundant fields, reliable systems, joyful workers, satisfied families, and partners celebrating Eden's excellence and integrity.",
+    seal: "Eden is flourishing. The harvest is abundant. The legacy is nourishing. It is sealed."
+  },
+  {
+    num: 8,
+    category: "Systems & Empire Bricks",
+    text: "My empire stands on systems. Every day, I lay powerful empire bricks through focused decisions, disciplined action, automation, structure, and divine order. What I build is scalable, excellent, and unshakable.",
+    seal: "The systems hold. The empire stands. The bricks are laid. It is done."
+  },
+  {
+    num: 9,
+    category: "Peace & Divine Timing",
+    text: "My peace is strategy. I release pressure, trust divine timing, and allow Infinite Intelligence to perfect every detail as I move with wisdom, confidence, and calm authority.",
+    seal: "The peace is my strategy. The timing is perfect. Infinite Intelligence governs. It is sealed."
+  },
+  {
+    num: 10,
+    category: "Legacy & Generational Transformation",
+    text: "I am building empires of impact, wealth, nourishment, dignity, and legacy. My life opens pathways for African youth, families, communities, and generations to rise.",
+    seal: "The legacy is built. The pathways are open. The generations are rising. It is done."
+  }
+];
+
+const steps = [
+  "Breathe in. Open your heart. Speak it.",
+  "Feel it land in your body. Speak it again.",
+  "Let it move from your mind to your identity. Speak it.",
+  "Claim it as already true. Speak it.",
+  "Seal it with gratitude. Speak it one final time."
+];
+
+let current = null;
+let count = 0;
+
+function renderList() {
+  const list = document.getElementById('aff-list');
+  list.innerHTML = affirmations.map(a => `
+    <div class="aff-card" onclick="selectAffirmation(${a.num - 1})">
+      <span class="card-num">${a.num}</span>
+      <div class="card-content">
+        <p class="card-text">${a.text}</p>
+        <p class="card-category">${a.category}</p>
+      </div>
+      <span class="card-arrow">›</span>
+    </div>
+  `).join('');
+}
+
+function selectAffirmation(i) {
+  current = affirmations[i];
+  count = 0;
+  document.getElementById('list-screen').classList.remove('active');
+  document.getElementById('practice-screen').classList.add('active');
+  document.getElementById('practice-category').textContent = current.category;
+  document.getElementById('practice-text').textContent = current.text;
+  document.getElementById('seal-text').textContent = current.seal;
+  updateUI();
+}
+
+function goBack() {
+  document.getElementById('practice-screen').classList.remove('active');
+  document.getElementById('list-screen').classList.add('active');
+  count = 0;
+}
+
+function speakIt() {
+  if (count >= 5) return;
+  count++;
+  updateUI();
+}
+
+function resetPractice() {
+  count = 0;
+  updateUI();
+}
+
+function updateUI() {
+  for (let i = 1; i <= 5; i++) {
+    document.getElementById('d' + i).classList.toggle('filled', i <= count);
+  }
+
+  const label = document.getElementById('dots-label');
+  label.textContent = count === 5 ? 'All 5 complete ✦' : `Repetition ${count} of 5`;
+
+  const guide = document.getElementById('step-guide');
+  guide.innerHTML = steps.map((s, i) => {
+    let cls = 'step';
+    if (i < count) cls += ' done';
+    else if (i === count) cls += ' current';
+    return `<p class="${cls}"><span class="step-marker">${i + 1}.</span>${s}</p>`;
+  }).join('');
+
+  const btn = document.getElementById('speak-btn');
+  if (count >= 5) {
+    btn.textContent = 'Complete';
+    btn.disabled = true;
+  } else {
+    btn.textContent = count === 0 ? 'Speak it' : 'Speak it again';
+    btn.disabled = false;
+  }
+
+  const seal = document.getElementById('seal-card');
+  if (count >= 5) seal.classList.add('visible');
+  else seal.classList.remove('visible');
+}
+
+renderList();
+</script>
+</body>
+</html>
