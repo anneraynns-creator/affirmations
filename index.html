@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anne 2.0 — Daily Affirmations</title>
+<title>Anne 3.0 — Daily Affirmations</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -258,14 +258,14 @@
 <body>
 <div class="container">
   <div class="header">
-    <p class="header-eyebrow">Anne 2.0</p>
+    <p class="header-eyebrow">Anne 3.0</p>
     <h1 class="header-title">Daily Affirmations</h1>
-    <p class="header-sub">Speak. Claim. Seal.</p>
+    <p class="header-sub">Peaceful · Expansive · Sovereign · Consistent</p>
   </div>
 
   <div class="anchor-bar">
     <p class="anchor-label">Core Identity Anchor</p>
-    <p class="anchor-text">I am divinely guided, fully aligned, richly resourced, radiantly healthy, and purposefully building empires of impact, wealth, nourishment, dignity, and legacy.</p>
+    <p class="anchor-text">I am the sovereign architect of value. Peaceful at the centre. Expansive in vision. Sovereign in leadership. Consistent in action.</p>
   </div>
 
   <!-- LIST SCREEN -->
@@ -294,17 +294,47 @@
     <button class="speak-btn" id="speak-btn" onclick="speakIt()">Speak it</button>
     <button class="reset-btn" onclick="resetPractice()">Begin again</button>
     <div class="seal-card" id="seal-card">
-      <p class="seal-eyebrow">Manifestation Seal</p>
+      <p class="seal-eyebrow">Integration Seal</p>
       <div class="seal-divider"></div>
       <p class="seal-text" id="seal-text"></p>
       <div class="seal-divider"></div>
-      <p class="seal-close">It is already done. I see it. I feel it. I live it.</p>
+      <p class="seal-close">Shlama. I carry this into purposeful action.</p>
     </div>
   </div>
 </div>
 
 <script>
 const themes = [
+{
+    "id": "core",
+    "label": "Anne 3.0 · Daily 7",
+    "hint": "Your seven affirmations for the current season."
+  },
+  {
+    "id": "sovereignty",
+    "label": "Sovereign Value",
+    "hint": "Self-worth, commercial sovereignty, and confident partnerships."
+  },
+  {
+    "id": "shlama",
+    "label": "Shlama & Alignment",
+    "hint": "Peace, emotional grounding, and the stone, river and sky."
+  },
+  {
+    "id": "execution",
+    "label": "Inspired Execution",
+    "hint": "Move from vision and research into action with kindness and discipline."
+  },
+  {
+    "id": "archetypes",
+    "label": "Five Archetypes",
+    "hint": "Warrior, Ruler, Creator, Sage, and Seeker working as one."
+  },
+  {
+    "id": "institution",
+    "label": "Institutional Legacy",
+    "hint": "Build capabilities, systems, wealth and generational impact."
+  },
   {
     id: "all",
     label: "All",
@@ -343,6 +373,246 @@ const themes = [
 ];
 
 const affirmations = [
+{
+    "theme": "core",
+    "category": "Anne 3.0 · Daily 7",
+    "text": "Shlama. I am whole. I am present. I am peaceful within myself. From this peace, I lead.",
+    "seal": "In peace, I begin. Shlama."
+  },
+  {
+    "theme": "core",
+    "category": "Anne 3.0 · Daily 7",
+    "text": "I am the sovereign architect of value. I bring my capabilities to the world with confidence, generosity and commercial clarity.",
+    "seal": "My value is clear. I carry it with dignity."
+  },
+  {
+    "theme": "core",
+    "category": "Anne 3.0 · Daily 7",
+    "text": "My vision deserves the same commitment I give to the visions of others.",
+    "seal": "I honour my own vision through action."
+  },
+  {
+    "theme": "core",
+    "category": "Anne 3.0 · Daily 7",
+    "text": "My past experiences inform my wisdom; they do not determine my future possibilities.",
+    "seal": "I learn, choose and advance."
+  },
+  {
+    "theme": "core",
+    "category": "Anne 3.0 · Daily 7",
+    "text": "I know the value I bring. I communicate with clarity, propose with confidence and negotiate with dignity.",
+    "seal": "I show up as a capable professional."
+  },
+  {
+    "theme": "core",
+    "category": "Anne 3.0 · Daily 7",
+    "text": "My Creator reveals possibilities. My Sage discerns. My Ruler decides. My Warrior acts. My Seeker learns.",
+    "seal": "My strengths work together in harmony."
+  },
+  {
+    "theme": "core",
+    "category": "Anne 3.0 · Daily 7",
+    "text": "I am peaceful at my centre, expansive in vision, sovereign in leadership and consistent in action.",
+    "seal": "Peace, vision, leadership and action. Shlama."
+  },
+  {
+    "theme": "sovereignty",
+    "category": "Sovereign Value",
+    "text": "I welcome mutually beneficial relationships, and I honour my work through purposeful action.",
+    "seal": "I welcome reciprocal value and clear commitments."
+  },
+  {
+    "theme": "sovereignty",
+    "category": "Sovereign Value",
+    "text": "I recognise genuine commitment, respect the decisions of others and direct my energy towards relationships where value can become reality.",
+    "seal": "My time and energy serve aligned commitments."
+  },
+  {
+    "theme": "sovereignty",
+    "category": "Sovereign Value",
+    "text": "My ability to create value is independent of any single institution’s willingness to recognise or adopt it.",
+    "seal": "I retain my agency and choose my path."
+  },
+  {
+    "theme": "sovereignty",
+    "category": "Sovereign Value",
+    "text": "I enter every room as a capable professional. I communicate with clarity, propose with confidence and negotiate with dignity.",
+    "seal": "I lead the conversation from a place of value."
+  },
+  {
+    "theme": "sovereignty",
+    "category": "Sovereign Value",
+    "text": "My work deserves to reach the people it was created to serve.",
+    "seal": "I make my work visible and accessible."
+  },
+  {
+    "theme": "sovereignty",
+    "category": "Sovereign Value",
+    "text": "I am comfortable communicating the value of my work, naming my price and inviting a decision.",
+    "seal": "I invite a fair exchange with confidence."
+  },
+  {
+    "theme": "sovereignty",
+    "category": "Sovereign Value",
+    "text": "I make the offer. I invite the decision. I honour the outcome. I continue building.",
+    "seal": "My commitment remains steady."
+  },
+  {
+    "theme": "sovereignty",
+    "category": "Sovereign Value",
+    "text": "I help people understand through stories, useful explanations and demonstrations. I confidently invite them to take the next step.",
+    "seal": "Facilitation is a strength I carry into marketing."
+  },
+  {
+    "theme": "sovereignty",
+    "category": "Sovereign Value",
+    "text": "Confident in value. Discerning in partnerships. Deliberate in securing commitments.",
+    "seal": "My commercial decisions are clear and grounded."
+  },
+  {
+    "theme": "shlama",
+    "category": "Shlama & Alignment",
+    "text": "I am grounded in peace, centred in wisdom and open to divine guidance.",
+    "seal": "Peace guides my presence."
+  },
+  {
+    "theme": "shlama",
+    "category": "Shlama & Alignment",
+    "text": "My worth is established. My experience is valuable. My capabilities solve meaningful problems.",
+    "seal": "My worth is not up for negotiation."
+  },
+  {
+    "theme": "shlama",
+    "category": "Shlama & Alignment",
+    "text": "I am grounded like the stone, flowing like the river and expansive like the sky.",
+    "seal": "Stone, river, sky. Shlama."
+  },
+  {
+    "theme": "shlama",
+    "category": "Shlama & Alignment",
+    "text": "My energy flows steadily and purposefully. I carry calm authority.",
+    "seal": "I move in steadiness and strength."
+  },
+  {
+    "theme": "shlama",
+    "category": "Shlama & Alignment",
+    "text": "I cultivate calm, inspired and directed energy.",
+    "seal": "I welcome clarity and ease."
+  },
+  {
+    "theme": "shlama",
+    "category": "Shlama & Alignment",
+    "text": "I lead through wisdom, love, discernment and service.",
+    "seal": "My leadership honours my values."
+  },
+  {
+    "theme": "execution",
+    "category": "Inspired Execution",
+    "text": "Inspiration gives me direction. Alignment gives me clarity. Decision creates commitment. Action gives my vision form.",
+    "seal": "I turn direction into action."
+  },
+  {
+    "theme": "execution",
+    "category": "Inspired Execution",
+    "text": "I find joy in discovering possibilities, fulfilment in bringing them to life and wisdom in learning from the results.",
+    "seal": "I create, deliver and learn."
+  },
+  {
+    "theme": "execution",
+    "category": "Inspired Execution",
+    "text": "My imagination creates possibilities. My hands and systems give them form.",
+    "seal": "Creation becomes implementation."
+  },
+  {
+    "theme": "execution",
+    "category": "Inspired Execution",
+    "text": "I am peaceful at my centre. My energy is sufficient for the next meaningful step. I allow myself to begin gently.",
+    "seal": "I can begin with one step."
+  },
+  {
+    "theme": "execution",
+    "category": "Inspired Execution",
+    "text": "I decide with clarity. I delegate with wisdom. I execute with discipline.",
+    "seal": "I choose, assign and act."
+  },
+  {
+    "theme": "execution",
+    "category": "Inspired Execution",
+    "text": "Independent in initiative. Strategic in collaboration. Unwavering in purpose.",
+    "seal": "My initiative moves my work forward."
+  },
+  {
+    "theme": "archetypes",
+    "category": "Five Archetypes",
+    "text": "My Warrior moves with courage. My commitments become meaningful action.",
+    "seal": "The next step begins now."
+  },
+  {
+    "theme": "archetypes",
+    "category": "Five Archetypes",
+    "text": "My Ruler leads with calm authority. I direct resources, capabilities and opportunities with wisdom.",
+    "seal": "I lead and delegate with confidence."
+  },
+  {
+    "theme": "archetypes",
+    "category": "Five Archetypes",
+    "text": "My Creator imagines valuable possibilities and gives them form through systems.",
+    "seal": "My ideas become useful offerings."
+  },
+  {
+    "theme": "archetypes",
+    "category": "Five Archetypes",
+    "text": "My Sage distinguishes valuable opportunities, sufficient evidence and appropriate action.",
+    "seal": "I have clarity for the next decision."
+  },
+  {
+    "theme": "archetypes",
+    "category": "Five Archetypes",
+    "text": "My Seeker remains open to guidance, learning and possibilities aligned with my purpose.",
+    "seal": "I learn with openness."
+  },
+  {
+    "theme": "archetypes",
+    "category": "Five Archetypes",
+    "text": "My Creator reveals possibilities. My Sage recognises what is ready. My Ruler chooses the direction and assigns responsibility. My Warrior brings the decision into action. My Seeker welcomes the lessons that action reveals.",
+    "seal": "All these qualities work together through me."
+  },
+  {
+    "theme": "institution",
+    "category": "Institutional Legacy",
+    "text": "I am the architect of interconnected ecosystems.",
+    "seal": "I build systems that serve generations."
+  },
+  {
+    "theme": "institution",
+    "category": "Institutional Legacy",
+    "text": "Through wisdom, capable people, intelligent systems and disciplined action, I create enduring value and expanding prosperity.",
+    "seal": "My leadership multiplies through capabilities."
+  },
+  {
+    "theme": "institution",
+    "category": "Institutional Legacy",
+    "text": "I architect institutions that create wealth, opportunity and transformation across generations.",
+    "seal": "My work creates enduring impact."
+  },
+  {
+    "theme": "institution",
+    "category": "Institutional Legacy",
+    "text": "I build wealth by creating meaningful value, developing capable systems and serving people sustainably.",
+    "seal": "Prosperity and service reinforce one another."
+  },
+  {
+    "theme": "institution",
+    "category": "Institutional Legacy",
+    "text": "My intelligence, relationships, creativity and leadership work together to create sustainable impact.",
+    "seal": "My strengths are aligned for lasting value."
+  },
+  {
+    "theme": "institution",
+    "category": "Institutional Legacy",
+    "text": "I build capabilities and systems through which my vision continues to advance.",
+    "seal": "The institution grows beyond my direct effort."
+  },
   {
     theme: "morning",
     category: "Morning — Divine Alignment",
@@ -503,7 +773,7 @@ const steps = [
   "Seal it with gratitude. Speak it one final time."
 ];
 
-let activeTheme = "all";
+let activeTheme = "core";
 let current = null;
 let count = 0;
 
@@ -586,7 +856,7 @@ function updateUI() {
 }
 
 renderTabs();
-setTheme('all');
+setTheme('core');
 </script>
 </body>
 </html>
